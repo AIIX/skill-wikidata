@@ -35,9 +35,10 @@ class WikidataSkill(MycroftSkill):
                 entity_birth_place = entity_birth_place_json['entities'][get_entity_birth_place_id]['labels']['en']['value']
                 result_speak = "{0} was born in {1}".format(person_name, entity_birth_place)
                 self.speak(result_speak)
-                #self.enclosure.bus.emit(Message("metadata", {"type": "skill-wikidata", "personContext": person_name,"answerData": result_speak, "imgLink": thumb_image}))
-                #self.gui.clear()
-                self.page("answer.qml")
+                self.gui["personContext"] = person_name
+                self.gui["answerData"] = result_speak
+                self.gui["imgLink"] = thumb_image
+                self.gui.show_page("answer.qml", override_idle=True)
             except Exception as e:
                 notFoundMessage = "I couldn't find where {0} was born".format(person_name)
                 self.speak(notFoundMessage)
@@ -64,11 +65,10 @@ class WikidataSkill(MycroftSkill):
                 entity_death_place = entity_death_place_json['entities'][get_entity_death_place_id]['labels']['en']['value']
                 result_speak = "{0} died in {1}".format(person_name, entity_death_place)
                 self.speak(result_speak)
-                #self.enclosure.bus.emit(Message("metadata", {"type": "skill-wikidata", "personContext": person_name, "answerData": result_speak, "imgLink": thumb_image}))
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = result_speak
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml")
+                self.gui.show_page("answer.qml", override_idle=True)
             except Exception as e:
                 notFoundMessage = "I couldn't find where {0} died".format(person_name)
                 self.speak(notFoundMessage)
@@ -101,7 +101,7 @@ class WikidataSkill(MycroftSkill):
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = result_msg
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml")
+                self.gui.show_page("answer.qml", override_idle=True)
                 #self.page("answer.qml")
             except Exception as e:
                 notFoundMessage = "I couldn't find the age of {0}".format(person_name)
@@ -132,7 +132,7 @@ class WikidataSkill(MycroftSkill):
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = entity_gender
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml")
+                self.gui.show_page("answer.qml", override_idle=True)
             except Exception as e:
                 notFoundMessage = "I couldn't find the gender of {0}".format(person_name)
                 self.speak(notFoundMessage)
@@ -162,7 +162,7 @@ class WikidataSkill(MycroftSkill):
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = entity_spouse_id
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml")
+                self.gui.show_page("answer.qml", override_idle=True)
             except Exception as e:
                 notFoundMessage = "I couldn't find any spouse of {0}".format(person_name)
                 self.speak(notFoundMessage)
@@ -192,7 +192,7 @@ class WikidataSkill(MycroftSkill):
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = entity_country_citizenship
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml")
+                self.gui.show_page("answer.qml", override_idle=True)
             except Exception as e:
                 notFoundMessage = "I couldn't find which country {0} is from".format(person_name)
                 self.speak(notFoundMessage)
@@ -222,7 +222,7 @@ class WikidataSkill(MycroftSkill):
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = entity_child_id
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml")
+                self.gui.show_page("answer.qml", override_idle=True)
             except Exception as e:
                 notFoundMessage = "I couldn't find any children of {0}".format(person_name)
                 self.speak(notFoundMessage)
@@ -252,7 +252,7 @@ class WikidataSkill(MycroftSkill):
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = entity_occupation_id
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml")
+                self.gui.show_page("answer.qml", override_idle=True)
             except Exception as e:
                 notFoundMessage = "I couldn't find any occupation for {0}".format(person_name)
                 self.speak(notFoundMessage)
@@ -282,7 +282,7 @@ class WikidataSkill(MycroftSkill):
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = entity_place_of_burial_id
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml")
+                self.gui.show_page("answer.qml", override_idle=True)
             except Exception as e:
                 notFoundMessage = "I couldn't find any burial information for {0}".format(person_name)
                 self.speak(notFoundMessage)
@@ -317,7 +317,7 @@ class WikidataSkill(MycroftSkill):
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = birth_date
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml")
+                self.gui.show_page("answer.qml", override_idle=True)
             except Exception as e:
                 notFoundMessage = "I couldn't find birth date information for {0}".format(person_name)
                 self.speak(notFoundMessage)
@@ -352,7 +352,7 @@ class WikidataSkill(MycroftSkill):
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = death_date
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml")
+                self.gui.show_page("answer.qml", override_idle=True)
             except Exception as e:
                 notFoundMessage = "I couldn't find any death date information for {0}".format(person_name)
                 self.speak(notFoundMessage)
