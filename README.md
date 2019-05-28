@@ -5,8 +5,12 @@ Skill Wikidata
 Get Current and Historic Facts & Information About A Person From Wikidata
 
 ## Examples 
-* "How old is linus torvalds"
-* "Where was bill gates born"
+* "How old is Steve Jobs"
+* "Where was Bill Gates born"
+* "What is the occupation of Linus Torvalds"
+* "What is Linus Torvalds date of birth"
+* "What is Abraham Lincoln date of death"
+* "What is Steve Jobs spouse name"
 
 ## Credits 
 Aix (@aiix)
@@ -23,3 +27,11 @@ platform_mark2 platform_plasmoid
 #person
 #history
 #information
+#gui
+#query
+#wiki
+#spouse
+#birthdate
+#deathdate
+#occupation
+#facts
