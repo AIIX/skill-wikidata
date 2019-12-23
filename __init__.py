@@ -18,6 +18,18 @@ class WikidataSkill(MycroftSkill):
     """
     Wikidata Skill
     """
+    def initialize(self):
+        self.add_event('skill-wikidata.aiix.home', self.showHome)
+    
+    @intent_file_handler('show.wikidata.home.intent')
+    def showHome(self, message):
+        self.gui.clear()
+        self.enclosure.display_manager.remove_active()
+        self.displayHome()
+        
+    def displayHome(self):
+        self.gui.show_page("homepage.qml")
+    
     @intent_file_handler('birth.place.of.person.intent')
     def handle_wikidata_birthplace_intent(self, message):
         """
