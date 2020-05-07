@@ -89,6 +89,9 @@ Mycroft.Delegate {
                         id: rootCard
                         reserveSpaceForIcon: false
                         label: "Hey Mycroft, " + model.example
+                        Keys.onReturnPressed: {
+                            Mycroft.MycroftController.sendText(model.example)
+                        }
                     }
                 }
             }
