@@ -6,12 +6,17 @@ import QtGraphicalEffects 1.0
 import Mycroft 1.0 as Mycroft
 
 Mycroft.Delegate {
-    id: wikiHomeDelegate
+    id: delegateWiki
     skillBackgroundSource: Qt.resolvedUrl("books.png")
     leftPadding: 0
     rightPadding: 0
     bottomPadding: 0
     topPadding: 0
+    focus: true
+
+    Component.onCompleted: {
+	delegateWiki.forceActiveFocus()
+    }
     
     ListModel {
         id: sampleModel
@@ -44,21 +49,25 @@ Mycroft.Delegate {
             
             ToolButton {
                 Kirigami.Theme.colorSet: Kirigami.Theme.Button
-                Layout.preferredWidth: Kirigami.Units.iconSizes.medium
-                Layout.preferredHeight: Kirigami.Units.iconSizes.medium
+                Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+                Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
                 Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+		flat: true
                 
-                contentItem: Kirigami.Icon {
+                contentItem: Image {
                     anchors.centerIn: parent
-                    source: "arrow-left"
+		    width: Kirigami.Units.iconSizes.smallMedium
+		    height: Kirigami.Units.iconSizes.smallMedium
+                    source: "back.png"
                 }
                 
                 onClicked: {
-                    wikiHomeDelegate.parent.backRequested()
+                    delegateWiki.parent.backRequested()
                 }
             }
             
             Kirigami.Heading {
+		id: headingLabel
                 level: 2
                 text: "Wikidata"
                 Layout.fillWidth: true
@@ -88,6 +97,7 @@ Mycroft.Delegate {
             Label {
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
+		font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
                 text: "Get current, historic facts & information about a person from Wikidata"
             }
             
@@ -105,7 +115,7 @@ Mycroft.Delegate {
                 id: skillExampleListView
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                focus: true
+                focus: false
                 clip: true
                 model: sampleModel
                 spacing: Kirigami.Units.smallSpacing
@@ -126,6 +136,7 @@ Mycroft.Delegate {
                             verticalAlignment: Text.AlignVCenter
                             elide: Text.ElideRight
                             color: Kirigami.Theme.textColor
+			    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
                             text: "Hey Mycroft, " + model.example
                     }
 

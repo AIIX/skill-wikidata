@@ -6,9 +6,28 @@ import org.kde.kirigami 2.4 as Kirigami
 import Mycroft 1.0 as Mycroft
 
 Mycroft.ProportionalDelegate {
+    id: delAns
     skillBackgroundSource: sessionData.imgLink
     skillBackgroundColorOverlay: "#88000000"
-    
+
+    ToolButton {
+       Layout.preferredWidth: Kirigami.Units.iconSizes.medium
+       Layout.preferredHeight: Kirigami.Units.iconSizes.medium
+
+       background: Rectangle {
+	   color: "transparent"
+       }
+
+       contentItem: Image {
+	   width: Kirigami.Units.iconSizes.smallMedium
+	   height: Kirigami.Units.iconSizes.smallMedium
+	   source: "back.png"
+       }
+       onClicked: {
+	  delAns.parent.backRequested()
+       }
+    }    
+
     ColumnLayout {
         id: grid
         Layout.fillWidth: true

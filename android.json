@@ -1,0 +1,6 @@
+{
+    "android_icon": "/res/icon/wikidata-skill.png",
+    "android_name": "Wikidata",
+    "android_handler": "skill-wikidata.aiix.home"
+}
+
