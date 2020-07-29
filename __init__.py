@@ -108,7 +108,8 @@ class WikidataSkill(MycroftSkill):
         try:
             get_entity_dob_id = entity_json['entities'][entity_id]['claims']['P569'][0]['mainsnak']['datavalue']['value']['time']
             try:
-                a = arrow.get(get_entity_dob_id)
+                fix_gedid = get_entity_dob_id.replace("+", "") 
+                a = arrow.get(fix_gedid)
                 birth_date = a.format("DD/MM/YYYY")
                 dob = birth_date
                 dob = datetime.strptime(dob, '%d/%m/%Y')
@@ -337,7 +338,8 @@ class WikidataSkill(MycroftSkill):
         try:
             get_entity_dob_id = entity_json['entities'][entity_id]['claims']['P569'][0]['mainsnak']['datavalue']['value']['time']
             try:
-                a = arrow.get(get_entity_dob_id)
+                fix_gedobid = get_entity_dob_id.replace("+", "")
+                a = arrow.get(fix_gedobid)
                 birth_date = a.format("DD,MM,YYYY")
                 birth_date_breakup = birth_date.split(",")
                 person_name = message.data['person']
@@ -378,7 +380,8 @@ class WikidataSkill(MycroftSkill):
         try:
             get_entity_dod_id = entity_json['entities'][entity_id]['claims']['P570'][0]['mainsnak']['datavalue']['value']['time']
             try:
-                a = arrow.get(get_entity_dod_id)
+                fix_gedodid = get_entity_dod_id.replace("+", "")
+                a = arrow.get(fix_gedodid)
                 death_date = a.format("DD,MM,YYYY")
                 death_date_breakup = death_date.split(",")
                 person_name = message.data['person']
