@@ -18,11 +18,16 @@ class WikidataSkill(MycroftSkill):
     """
     Wikidata Skill
     """
+    def __init__(self):
+        super(WikidataSkill, self).__init__(name="WikidataSkill")
+    
     def initialize(self):
         self.add_event('skill-wikidata.aiix.home', self.showHome)
 
     @intent_file_handler('show.wikidata.home.intent')
     def showHome(self, message):
+        self.gui.clear()
+        self.enclosure.display_manager.remove_active()
         self.displayHome()
 
     def displayHome(self):
@@ -44,11 +49,12 @@ class WikidataSkill(MycroftSkill):
                 entity_birth_place_json =  get_entity_birth_place_response.json()
                 entity_birth_place = entity_birth_place_json['entities'][get_entity_birth_place_id]['labels']['en']['value']
                 result_speak = self.translate('birthplace', {'person': person_name, 'place': entity_birth_place})
-                self.speak(result_speak)
+                self.gui.clear()
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = result_speak
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml", override_idle=60)
+                self.gui.show_page("answer.qml", override_idle=30)
+                self.speak(result_speak)
             except Exception as e:
                 notFoundMessage = self.translate('birthplace.not.found',
                                                  {'person': person_name})
@@ -78,11 +84,12 @@ class WikidataSkill(MycroftSkill):
                 result_speak = self.translate('deathplace',
                                               {'person': person_name,
                                                'place': entity_death_place})
-                self.speak(result_speak)
+                self.gui.clear()
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = result_speak
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml", override_idle=60)
+                self.gui.show_page("answer.qml", override_idle=30)
+                self.speak(result_speak)
             except Exception as e:
                 notFoundMessage = self.translate('deathplace.not.found',
                                                  {'person': person_name})
@@ -114,13 +121,12 @@ class WikidataSkill(MycroftSkill):
                 age = ("%d" % ((datetime.today() - dob).days/365))
                 result_msg = self.translate('age', {'person': person_name,
                                                     'age': age})
-                self.speak(result_msg)
-                #self.enclosure.bus.emit(Message("metadata", {"type": "skill-wikidata", "personContext": person_name, "answerData": result_msg, "imgLink": thumb_image}))
+                self.gui.clear()
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = result_msg
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml", override_idle=60)
-                #self.page("answer.qml")
+                self.gui.show_page("answer.qml", override_idle=30)
+                self.speak(result_msg)
             except Exception as e:
                 notFoundMessage = self.translate('age.not.found',
                                                  {'person': person_name})
@@ -148,11 +154,12 @@ class WikidataSkill(MycroftSkill):
                 entity_gender_id_json =  get_entity_gender_id_response.json()
                 entity_gender = entity_gender_id_json['entities'][get_entity_gender_id]['labels']['en']['value']
                 self.speak(entity_gender)
-                #self.enclosure.bus.emit(Message("metadata", {"type": "skill-wikidata", "personContext": person_name,"answerData": entity_gender, "imgLink": thumb_image}))
+                self.gui.clear()
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = entity_gender
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml", override_idle=60)
+                self.gui.show_page("answer.qml", override_idle=30)
+                self.speak(entity_gender)
             except Exception as e:
                 notFoundMessage = self.translate('gender.not.found',
                                                  {'person': person_name})
@@ -179,12 +186,12 @@ class WikidataSkill(MycroftSkill):
                 get_entity_spouse_id_response = requests.get(zurl+get_entity_spouse_id)
                 entity_spouse_id_json = get_entity_spouse_id_response.json()
                 entity_spouse_id = entity_spouse_id_json['entities'][get_entity_spouse_id]['labels']['en']['value']
-                self.speak(entity_spouse_id)
-                #self.enclosure.bus.emit(Message("metadata", {"type": "skill-wikidata", "personContext": person_name,"answerData": entity_spouse_id, "imgLink": thumb_image}))
+                self.gui.clear()
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = entity_spouse_id
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml", override_idle=60)
+                self.gui.show_page("answer.qml", override_idle=30)
+                self.speak(entity_spouse_id)
             except Exception as e:
                 notFoundMessage = self.translate('spouse.not.found',
                                                  {'person': person_name})
@@ -211,12 +218,12 @@ class WikidataSkill(MycroftSkill):
                 get_entity_country_citizenship_id_response = requests.get(zurl+get_entity_country_citizenship_id)
                 entity_country_citizenship_json = get_entity_country_citizenship_id_response.json()
                 entity_country_citizenship = entity_country_citizenship_json['entities'][get_entity_country_citizenship_id]['labels']['en']['value']
-                self.speak(entity_country_citizenship)
-                #self.enclosure.bus.emit(Message("metadata", {"type": "skill-wikidata", "personContext": person_name,"answerData": entity_country_citizenship, "imgLink": thumb_image}))
+                self.gui.clear()
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = entity_country_citizenship
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml", override_idle=60)
+                self.gui.show_page("answer.qml", override_idle=30)
+                self.speak(entity_country_citizenship)
             except Exception as e:
                 notFoundMessage = self.translate('country.not.found',
                                                  {'person': person_name})
@@ -243,12 +250,12 @@ class WikidataSkill(MycroftSkill):
                 get_entity_child_id_response = requests.get(zurl+get_entity_child_id)
                 entity_child_id_json = get_entity_child_id_response.json()
                 entity_child_id = entity_child_id_json = entity_child_id_json['entities'][get_entity_child_id]['labels']['en']['value']
-                self.speak(entity_child_id)
-                #self.enclosure.bus.emit(Message("metadata", {"type": "skill-wikidata", "personContext": person_name,"answerData": entity_child_id, "imgLink": thumb_image}))
+                self.gui.clear()
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = entity_child_id
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml", override_idle=60)
+                self.gui.show_page("answer.qml", override_idle=30)
+                self.speak(entity_child_id)
             except Exception as e:
                 notFoundMessage = self.translate('children.not.found',
                                                  {'person': person_name})
@@ -275,12 +282,12 @@ class WikidataSkill(MycroftSkill):
                 get_entity_occupation_id_response = requests.get(zurl+get_entity_occupation_id)
                 entity_occupation_id_json = get_entity_occupation_id_response.json()
                 entity_occupation_id = entity_occupation_id_json['entities'][get_entity_occupation_id]['labels']['en']['value']
-                self.speak(entity_occupation_id)
-                #self.enclosure.bus.emit(Message("metadata", {"type": "skill-wikidata", "personContext": person_name,"answerData": entity_occupation_id, "imgLink": thumb_image}))
+                self.gui.clear()
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = entity_occupation_id
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml", override_idle=60)
+                self.gui.show_page("answer.qml", override_idle=30)
+                self.speak(entity_occupation_id)
             except Exception as e:
                 notFoundMessage = self.translate('occupation.not.found',
                                                  {'person': person_name})
@@ -307,12 +314,12 @@ class WikidataSkill(MycroftSkill):
                 get_entity_place_of_burial_id_response = requests.get(zurl+get_entity_place_of_burial_id)
                 entity_place_of_burial_id_json = get_entity_place_of_burial_id_response.json()
                 entity_place_of_burial_id = entity_place_of_burial_id_json['entities'][get_entity_place_of_burial_id]['labels']['en']['value']
-                self.speak(entity_place_of_burial_id)
-                #self.enclosure.bus.emit(Message("metadata", {"type": "skill-wikidata", "personContext": person_name,"answerData": entity_place_of_burial_id, "imgLink": thumb_image}))
+                self.gui.clear()
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = entity_place_of_burial_id
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml", override_idle=60)
+                self.gui.show_page("answer.qml", override_idle=30)
+                self.speak(entity_place_of_burial_id)
             except Exception as e:
                 notFoundMessage = self.translate('burial.not.found',
                                                  {'person': person_name})
@@ -349,12 +356,12 @@ class WikidataSkill(MycroftSkill):
                                                       'day': day,
                                                       'month': month,
                                                       'year': year})
-                self.speak(birth_date_to_speak)
-                #self.enclosure.bus.emit(Message("metadata", {"type": "skill-wikidata", "personContext": person_name,"answerData": birth_date, "imgLink": thumb_image}))
+                self.gui.clear()
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = birth_date
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml", override_idle=60)
+                self.gui.show_page("answer.qml", override_idle=30)
+                self.speak(birth_date_to_speak)
             except Exception as e:
                 notFoundMessage = self.translate('date.of.birth.not.found',
                                                  {'person': person_name})
@@ -391,12 +398,12 @@ class WikidataSkill(MycroftSkill):
                                                       'day': day,
                                                       'month': month,
                                                       'year': year})
-                self.speak(death_date_to_speak)
-                #self.enclosure.bus.emit(Message("metadata", {"type": "skill-wikidata", "personContext": person_name,"answerData": death_date, "imgLink": thumb_image}))
+                self.gui.clear()
                 self.gui["personContext"] = person_name
                 self.gui["answerData"] = death_date
                 self.gui["imgLink"] = thumb_image
-                self.gui.show_page("answer.qml", override_idle=60)
+                self.gui.show_page("answer.qml", override_idle=30)
+                self.speak(death_date_to_speak)
             except Exception as e:
                 notFoundMessage = self.translate('date.of.death.not.found',
                                                  {'person': person_name})

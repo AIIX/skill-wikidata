@@ -15,7 +15,7 @@ Mycroft.Delegate {
     focus: true
 
     Component.onCompleted: {
-	delegateWiki.forceActiveFocus()
+        delegateWiki.forceActiveFocus()
     }
     
     ListModel {
@@ -52,12 +52,12 @@ Mycroft.Delegate {
                 Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
                 Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
                 Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-		flat: true
+                flat: true
                 
                 contentItem: Image {
                     anchors.centerIn: parent
-		    width: Kirigami.Units.iconSizes.smallMedium
-		    height: Kirigami.Units.iconSizes.smallMedium
+                    width: Kirigami.Units.iconSizes.smallMedium
+                    height: Kirigami.Units.iconSizes.smallMedium
                     source: "back.png"
                 }
                 
@@ -67,7 +67,7 @@ Mycroft.Delegate {
             }
             
             Kirigami.Heading {
-		id: headingLabel
+                id: headingLabel
                 level: 2
                 text: "Wikidata"
                 Layout.fillWidth: true
@@ -91,13 +91,13 @@ Mycroft.Delegate {
             Kirigami.Heading {
                 level: 2
                 font.bold: true
-                text: "What can it do" 
+                text: "What can it do"
             }
             
             Label {
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
-		font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
                 text: "Get current, historic facts & information about a person from Wikidata"
             }
             
@@ -110,7 +110,7 @@ Mycroft.Delegate {
                 font.bold: true
                 text: "Examples"
             }
-                                    
+
             ListView {
                 id: skillExampleListView
                 Layout.fillWidth: true
@@ -128,16 +128,16 @@ Mycroft.Delegate {
                     }
                     
                     contentItem: Label {
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            anchors.rightMargin: Kirigami.Units.largeSpacing
-                            anchors.leftMargin: Kirigami.Units.largeSpacing
-                            wrapMode: Text.WordWrap
-                            verticalAlignment: Text.AlignVCenter
-                            elide: Text.ElideRight
-                            color: Kirigami.Theme.textColor
-			    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
-                            text: "Hey Mycroft, " + model.example
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.rightMargin: Kirigami.Units.largeSpacing
+                        anchors.leftMargin: Kirigami.Units.largeSpacing
+                        wrapMode: Text.WordWrap
+                        verticalAlignment: Text.AlignVCenter
+                        elide: Text.ElideRight
+                        color: Kirigami.Theme.textColor
+                        font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
+                        text: "Hey Mycroft, " + model.example
                     }
 
                     onClicked: {
