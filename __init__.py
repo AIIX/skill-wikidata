@@ -27,7 +27,6 @@ class WikidataSkill(MycroftSkill):
     @intent_file_handler('show.wikidata.home.intent')
     def showHome(self, message):
         self.gui.clear()
-        self.enclosure.display_manager.remove_active()
         self.displayHome()
 
     def displayHome(self):
